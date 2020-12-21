@@ -160,7 +160,8 @@ public class MouseView extends FrameLayout {
                     }else{
                         layoutParams.x = 0;
                     }
-                    return true;
+
+                    break;
 
                 case KeyEvent.KEYCODE_DPAD_RIGHT:
                     if(layoutParams.x + mMoveDis + layoutParams.width <= screenWidth){
@@ -168,7 +169,7 @@ public class MouseView extends FrameLayout {
                     }else{
                         layoutParams.x = screenWidth - MOUSE_SIZE;
                     }
-                    return true;
+                    break;
                 case KeyEvent.KEYCODE_DPAD_UP:
                     if(layoutParams.y - mMoveDis >= 0) {
                         layoutParams.y -= mMoveDis;
@@ -178,8 +179,7 @@ public class MouseView extends FrameLayout {
 //                            webView.scrollBy(0, -mMoveDis);
 //                        }
                     }
-                    return true;
-
+                    break;
                 case KeyEvent.KEYCODE_DPAD_DOWN:
                     if(layoutParams.y + mMoveDis + layoutParams.height <= screenHeight){
                         layoutParams.y += mMoveDis;
@@ -189,7 +189,7 @@ public class MouseView extends FrameLayout {
 //                            webView.scrollBy(0, mMoveDis);
 //                        }
                     }
-                    return true;
+                    break;
             }
             Log.i("moveMouse","layoutParams.x:"+layoutParams.x+", layoutParams.y:"+layoutParams.y);
             windowManager.updateViewLayout(mMouseView, layoutParams);
@@ -217,9 +217,11 @@ public class MouseView extends FrameLayout {
                 }
 
             } );
-            return true;
         }
 
+        if (event.getKeyCode()>= 19 && event.getKeyCode() <= 23){
+            return true;
+        }
         return false;
     }
 
