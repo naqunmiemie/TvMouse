@@ -160,8 +160,7 @@ public class MouseView extends FrameLayout {
                     }else{
                         layoutParams.x = 0;
                     }
-
-                    break;
+                    return true;
 
                 case KeyEvent.KEYCODE_DPAD_RIGHT:
                     if(layoutParams.x + mMoveDis + layoutParams.width <= screenWidth){
@@ -169,7 +168,7 @@ public class MouseView extends FrameLayout {
                     }else{
                         layoutParams.x = screenWidth - MOUSE_SIZE;
                     }
-                    break;
+                    return true;
                 case KeyEvent.KEYCODE_DPAD_UP:
                     if(layoutParams.y - mMoveDis >= 0) {
                         layoutParams.y -= mMoveDis;
@@ -179,7 +178,8 @@ public class MouseView extends FrameLayout {
 //                            webView.scrollBy(0, -mMoveDis);
 //                        }
                     }
-                    break;
+                    return true;
+
                 case KeyEvent.KEYCODE_DPAD_DOWN:
                     if(layoutParams.y + mMoveDis + layoutParams.height <= screenHeight){
                         layoutParams.y += mMoveDis;
@@ -189,7 +189,7 @@ public class MouseView extends FrameLayout {
 //                            webView.scrollBy(0, mMoveDis);
 //                        }
                     }
-                    break;
+                    return true;
             }
             Log.i("moveMouse","layoutParams.x:"+layoutParams.x+", layoutParams.y:"+layoutParams.y);
             windowManager.updateViewLayout(mMouseView, layoutParams);
@@ -202,8 +202,13 @@ public class MouseView extends FrameLayout {
                 public void run() {
 
                     Log.i("tag","点击layoutParams.x:"+layoutParams.x+", layoutParams.y:"+layoutParams.y);
-                    inst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(),
-                            SystemClock.uptimeMillis(), event.getAction(), layoutParams.x, layoutParams.y, 0));    //x,y 即是事件的坐标
+                    try {
+                        inst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(),
+                                SystemClock.uptimeMillis(), event.getAction(), layoutParams.x, layoutParams.y, 0));    //x,y 即是事件的坐标
+                    }catch (Exception e){
+                        Log.e("tag",e.toString());
+                    }
+
 
 
 //                    inst.sendPointerSync(MotionEvent.obtain(SystemClock.uptimeMillis(),SystemClock.uptimeMillis(),MotionEvent.ACTION_DOWN, layoutParams.x, layoutParams.y, 0));
@@ -212,9 +217,10 @@ public class MouseView extends FrameLayout {
                 }
 
             } );
+            return true;
         }
 
-        return true;
+        return false;
     }
 
 

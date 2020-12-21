@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     private CustomWebView webView;
     private MouseView mouseView;
 
-    public static final String expmpleUrl = "https://www.bilibili.com/";
+    public static final String expmpleUrl = "http://r.7daysinn.cn/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
