@@ -8,4 +8,7 @@
 鼠标图标使用windowManager addview添加
 点击事件使用 Instrumentation
 
-项目地址：
+项目地址：https://github.com/naqunmiemie/TvMouse/
+
+qq/email:944081949     @qq.com
+vx/phone:13971202008
